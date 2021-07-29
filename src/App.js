@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Coins from "./components/Coins";
 import CoinsPagination from "./components/CoinsPagination.js";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Coindetails from "./components/Coindetails";
 
 import "./App.css";
 
@@ -17,7 +19,7 @@ const App = () => {
     );
 
     const coinList = await response.json();
-    // console.log(coinList);
+
     setCoins(coinList);
   };
   const checkNext = async () => {
@@ -46,32 +48,41 @@ const App = () => {
     );
   }
   return (
-    <div>
-      <div style={{ textAlign: "center", padding: ".5rem" }}>
-        <label
-          htmlFor="search"
-          style={{ fontWeight: 700, marginRight: ".3rem" }}
-        >
-          Search
-        </label>
-        <input
-          type="text"
-          id="search"
-          value={q}
-          name="search"
-          onChange={(e) => {
-            setQ(e.target.value);
-          }}
-          style={{ padding: ".2rem" }}
-        />
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <CoinsPagination page={page} setPage={setPage} />
-      </div>
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          <div>
+            <div style={{ textAlign: "center", padding: ".5rem" }}>
+              <label
+                htmlFor="search"
+                style={{ fontWeight: 700, marginRight: ".3rem" }}
+              >
+                Search
+              </label>
+              <input
+                type="text"
+                id="search"
+                value={q}
+                name="search"
+                onChange={(e) => {
+                  setQ(e.target.value);
+                }}
+                style={{ padding: ".2rem" }}
+              />
+            </div>
+            <div style={{ textAlign: "center" }}>
+              <CoinsPagination page={page} setPage={setPage} />
+            </div>
 
-      <Coins coins={search(coins)} />
-      <CoinsPagination page={page} setPage={setPage} />
-    </div>
+            <Coins coins={search(coins)} />
+            <CoinsPagination page={page} setPage={setPage} />
+          </div>
+        </Route>
+        <Route exact path="/coin/:name">
+          <Coindetails />
+        </Route>
+      </Switch>
+    </Router>
   );
 };
 

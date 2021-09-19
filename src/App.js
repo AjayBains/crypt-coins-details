@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Coins from "./components/Coins";
 import CoinsPagination from "./components/CoinsPagination.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Coindetails from "./components/Coindetails";
+import Coindetails from "./components/coindetails/Coindetails.js";
 
 import "./App.css";
 
@@ -78,7 +78,7 @@ const App = () => {
             <CoinsPagination page={page} setPage={setPage} />
           </div>
         </Route>
-        <Route exact path="/coin/:name">
+        <Route path="/coin/:name">
           <Coindetails />
         </Route>
       </Switch>

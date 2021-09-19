@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useRouteMatch, useParams } from "react-router-dom";
-import CoinPage from "../components/CoinPage";
+import CoinPage from "../coinPage/CoinPage";
 
 const Coindetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [coin, setCoin] = useState();
   const parameters = useRouteMatch();
+  console.log(parameters);
 
   const getCoinDetails = async () => {
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/${parameters.params.name.toLowerCase()}`
     );
     const coinDetails = await response.json();
-    console.log(coinDetails);
+    console.info(coinDetails);
     setCoin(coinDetails);
     setIsLoading(false);
     console.log(parameters);

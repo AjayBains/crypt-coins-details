@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./coinChart.css";
-
+// Create a empty data set for line chart of recharts
 let data = [];
 
 function CoinChart({ coin }) {
@@ -25,11 +25,13 @@ function CoinChart({ coin }) {
     );
     const coinChitha = await response.json();
     console.log(coinChitha);
-
+    console.log(isLoading);
+    // Setting coin which needs to be charted
     setCoinToMap(coinChitha);
+
     coinChitha.prices.map((el, index) => {
       let price = el[1];
-      let day = index + 1;
+      let day = index;
       let priceperDay = { price, day };
       return data.push(priceperDay);
     });

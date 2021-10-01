@@ -10,51 +10,39 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./coinChart.css";
-// Create a empty data set for line chart of recharts
-let data = [];
 
 function CoinChart({ coin }) {
-  console.log(coin);
-
   const [isLoading, setIsLoading] = useState(true);
-  const [coinToMap, setCoinToMap] = useState("");
+
+  const [data, setData] = useState([]);
 
   const getCoinPriceHistory = async () => {
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/${coin.id}/market_chart?vs_currency=usd&days=30&interval=daily`
     );
     const coinChitha = await response.json();
-    console.log(coinChitha);
-    console.log(isLoading);
-    // Setting coin which needs to be charted
-    setCoinToMap(coinChitha);
+
+    let prices = [];
 
     coinChitha.prices.map((el, index) => {
       let price = el[1];
       let day = index;
       let priceperDay = { price, day };
-      return data.push(priceperDay);
+      return prices.push(priceperDay);
     });
+
+    setData(prices);
     setIsLoading(false);
   };
+
   useEffect(() => {
     getCoinPriceHistory();
-    console.log(data);
   }, []);
 
-  return (
-    <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        // <div className="coinChart">coinchart{coin.name}</div>
-        <ChartPresent />
-      )}
-    </>
-  );
+  return <>{isLoading ? <p>Loading...</p> : <ChartPresent data={data} />}</>;
 }
 
-const ChartPresent = function () {
+const ChartPresent = function ({ data }) {
   return (
     <>
       <ResponsiveContainer width="50%" height="50%">

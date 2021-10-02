@@ -19,6 +19,7 @@ const App = () => {
     );
 
     const coinList = await response.json();
+    console.log(coinList);
 
     setCoins(coinList);
   };

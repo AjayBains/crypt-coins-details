@@ -13,7 +13,7 @@ const Coindetails = () => {
       `https://api.coingecko.com/api/v3/coins/${parameters.params.name.toLowerCase()}`
     );
     const coinDetails = await response.json();
-    console.info(coinDetails);
+    console.log(coinDetails);
     setCoin(coinDetails);
     setIsLoading(false);
     console.log(parameters);

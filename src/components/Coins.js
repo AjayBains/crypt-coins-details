@@ -32,7 +32,7 @@ const Coins = ({ coins }) => {
                 <img src={image} alt="" className="coin__img" />
               </td>
               <td>
-                <Link to={`coin/${coin.name}`}>{name}</Link>
+                <Link to={`coin/${coin.id}`}>{name}</Link>
               </td>
               <td>{current_price} INR</td>
               <td>{max_supply}</td>

@@ -44,7 +44,8 @@ function CoinChart({ coin }) {
 
 const ChartPresent = function ({ data }) {
   return (
-    <>
+    <div className="coinChart">
+      <h4>Price chart for last 30 days in USD</h4>
       <ResponsiveContainer width="50%" height="50%">
         <LineChart
           width={300}
@@ -70,7 +71,7 @@ const ChartPresent = function ({ data }) {
           />
         </LineChart>
       </ResponsiveContainer>
-    </>
+    </div>
   );
 };
 

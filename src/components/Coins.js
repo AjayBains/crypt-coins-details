@@ -35,7 +35,7 @@ const Coins = ({ currency, coins }) => {
                 <Link to={`coin/${coin.id}`}>{name}</Link>
               </td>
               <td>
-                {current_price} {currency}
+                {current_price} {currency.toUpperCase()}
               </td>
               <td>{max_supply}</td>
             </tr>

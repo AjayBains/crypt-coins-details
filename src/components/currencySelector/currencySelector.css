@@ -1,3 +1,17 @@
 .currencySelector {
   text-align: right;
+  margin-right: 2rem;
+}
+select {
+  width: 20%;
+  text-align: center;
+  border-radius: 20px;
+  color: rgb(124, 7, 124);
+  background-color: springgreen;
+  padding: 2px 5px;
+}
+option {
+  color: palevioletred;
+  font-size: 1.2rem;
+  background-color: snow;
 }

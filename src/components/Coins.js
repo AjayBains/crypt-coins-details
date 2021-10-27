@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Coins = ({ coins }) => {
+const Coins = ({ currency, coins }) => {
   return (
     <table>
       <thead>
@@ -9,7 +9,7 @@ const Coins = ({ coins }) => {
           <th>Market Cap Rank</th>
           <th>ICON</th>
           <th>Name</th>
-          <th>Price(INR)</th>
+          <th>Price({currency})</th>
           <th>Max Supply</th>
         </tr>
       </thead>
@@ -34,7 +34,9 @@ const Coins = ({ coins }) => {
               <td>
                 <Link to={`coin/${coin.id}`}>{name}</Link>
               </td>
-              <td>{current_price} INR</td>
+              <td>
+                {current_price} {currency}
+              </td>
               <td>{max_supply}</td>
             </tr>
           );

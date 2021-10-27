@@ -5,17 +5,24 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Coindetails from "./components/coindetails/Coindetails.js";
 
 import "./App.css";
+import CurrencySelector from "./components/currencySelector/CurrencySelector";
 
 const App = () => {
   const [coins, setCoins] = useState([]);
   const [q, setQ] = useState("");
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
+  const [currency, setCurrency] = useState("usd");
+
+  const handleCurrency = (e) => {
+    setCurrency(e.target.value);
+  };
+  setTimeout(() => console.log(currency), 1000);
 
   const getCoinList = async () => {
     // const response = await fetch("https://api.coingecko.com/api/v3/coins/list");
     const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=100&page=${page}&sparkline=false`
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=${page}&sparkline=false`
     );
 
     const coinList = await response.json();
@@ -26,7 +33,7 @@ const App = () => {
   const checkNext = async () => {
     // const response = await fetch("https://api.coingecko.com/api/v3/coins/list");
     const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=INR&order=market_cap_desc&per_page=100&page=${
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=${
         page + 1
       }&sparkline=false`
     );
@@ -38,7 +45,7 @@ const App = () => {
 
   useEffect(() => {
     getCoinList();
-  }, [page]);
+  }, [page, currency]);
 
   useEffect(() => {
     checkNext();
@@ -71,11 +78,15 @@ const App = () => {
                 style={{ padding: ".2rem" }}
               />
             </div>
+            <CurrencySelector
+              currency={currency}
+              handleCurrency={handleCurrency}
+            />
             <div style={{ textAlign: "center" }}>
               <CoinsPagination page={page} setPage={setPage} />
             </div>
 
-            <Coins coins={search(coins)} />
+            <Coins currency={currency} coins={search(coins)} />
             <CoinsPagination page={page} setPage={setPage} />
           </div>
         </Route>

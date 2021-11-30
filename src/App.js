@@ -9,7 +9,7 @@ import CurrencySelector from "./components/currencySelector/CurrencySelector";
 
 const App = () => {
   const [coins, setCoins] = useState([]);
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(""); // input search query state
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [currency, setCurrency] = useState("usd");

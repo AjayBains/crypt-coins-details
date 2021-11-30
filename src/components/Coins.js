@@ -10,7 +10,7 @@ const Coins = ({ currency, coins }) => {
           <th>ICON</th>
           <th>Name</th>
           <th>Price({currency})</th>
-          <th>Max Supply</th>
+          <th>All time High {currency}</th>
         </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@ const Coins = ({ currency, coins }) => {
             name,
             image,
             current_price,
-            market_cap,
+            ath,
             market_cap_rank,
             max_supply,
           } = coin;
@@ -37,7 +37,7 @@ const Coins = ({ currency, coins }) => {
               <td>
                 {current_price} {currency.toUpperCase()}
               </td>
-              <td>{max_supply}</td>
+              <td>{ath}</td>
             </tr>
           );
         })}
